@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1060388739332",
+    "firebase_url": "https://wassal-45a22.firebaseio.com",
+    "project_id": "wassal-45a22",
+    "storage_bucket": "wassal-45a22.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1060388739332:android:4eb7ea6ef19fc598",
+        "android_client_info": {
+          "package_name": "com.example.wassal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1060388739332-dc5oad7f6dmt5na2f1km0dbd5frvh19o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEETpcW4o8n4mYNcXi3xBSbYwvDCO7r0U"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
