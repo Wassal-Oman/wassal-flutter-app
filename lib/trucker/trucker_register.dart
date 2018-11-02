@@ -6,18 +6,18 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 // import other dart files
-import './customer_otp_verify.dart';
+import './trucker_otp_verify.dart';
 import '../widgets/input_form_field.dart';
 import '../widgets/password_form_field.dart';
 import '../widgets/round_button.dart';
 import '../widgets/outline_button.dart';
 
-class CustomerRegister extends StatefulWidget {
+class TruckerRegister extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _CustomerRegisterState();
+  State<StatefulWidget> createState() => _TruckerRegisterState();
 }
 
-class _CustomerRegisterState extends State<CustomerRegister> {
+class _TruckerRegisterState extends State<TruckerRegister> {
   // define attributes
   String name;
   String phone;
@@ -92,12 +92,12 @@ class _CustomerRegisterState extends State<CustomerRegister> {
             // go to phone verification page
             Navigator.of(context).pop();
             Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-              return CustomerOTPVerify(phone: '+968' + this.phone);
+              return TruckerOTPVerify(phone: '+968' + this.phone);
             }));
 
           }).catchError((err) {
             print(err);
-            showToastMessage('Cannot register user');
+            showToastMessage('Cannot register user!');
           });
         }
       }).catchError((AuthException e) {
@@ -117,11 +117,12 @@ class _CustomerRegisterState extends State<CustomerRegister> {
   }
 
   Future<void> addUserToDatabase(String id, String email, String name, String phone) async {
-    return await database.collection('customers').document(id).setData({
-      'customer_id': id,
-      'customer_email': email,
-      'customer_name': name,
-      'customer_phone': '+968' + phone
+    return await database.collection('truckers').document(id).setData({
+      'trucker_id': id,
+      'trucker_email': email,
+      'trucker_name': name,
+      'trucker_phone': '+968' + phone,
+      'trucker_activated': 'false'
     });
   }
 

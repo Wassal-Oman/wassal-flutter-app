@@ -20,22 +20,19 @@ class TruckerLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ConstrainedBox(
-        constraints: const BoxConstraints.expand(),
-        child: ListView(
+        body: Center(
+      child: SingleChildScrollView(
+        child: Column(
           children: <Widget>[
-            SizedBox(
-              height: 250.0,
-              width: 250.0,
-              child: Image.asset('assets/images/logo.png', scale: 3.0,),
-            ),
+            Image.asset('assets/images/logo.png', scale: 3.0),
             InputField('enter email address', Icons.email, TextInputType.emailAddress),
             PasswordInputField('enter password', Icons.lock, TextInputType.text),
             RoundBtn('SIGN IN', signIn),
-            OutlineBtn('FORGOT PASSWORD?', () => Navigator.of(context).pushNamed('/forget_password')),
+            RoundBtn('SIGN UP', () => Navigator.of(context).pushNamed('/trucker_register')),
+            OutlineBtn('FORGOT PASSWORD?', () => Navigator.of(context).pushNamed('/forget_password'))
           ],
         ),
       ),
-    );
+    ));
   }
 }

@@ -14,6 +14,8 @@ import './customer/customer_otp_verify.dart';
 
 // truck driver dart files
 import './trucker/trucker_login.dart';
+import './trucker/trucker_register.dart';
+import './trucker/trucker_otp_verify.dart';
 
 // launch the app
 void main() => runApp(MyApp());
@@ -32,7 +34,9 @@ class MyApp extends StatelessWidget {
         '/customer_login': (BuildContext context) => CustomerLogin(),
         '/trucker_login': (BuildContext context) => TruckerLogin(),
         '/customer_register': (BuildContext context) => CustomerRegister(),
+        '/trucker_register': (BuildContext context) => TruckerRegister(),
         '/customer_otp_verify': (BuildContext context) => CustomerOTPVerify(),
+        '/trucker_otp_verify': (BuildContext context) => TruckerOTPVerify(),
         '/forget_password': (BuildContext context) => ForgetPassword(),
       },
       debugShowCheckedModeBanner: false,
