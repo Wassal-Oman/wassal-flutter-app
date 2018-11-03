@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:flutter/services.dart';
 
 // import other dart files
 import '../widgets/input_form_field.dart';
@@ -121,8 +120,8 @@ class _CustomerLoginState extends State<CustomerLogin> {
                 InputFormField('enter email address', 'please enter a valid email',Icons.email, TextInputType.emailAddress, emailController),
                 PasswordFormField('enter password', Icons.lock, TextInputType.text, passwordController),
                 RoundBtn(context, 'SIGN IN', checkValidation),
-                RoundBtn(context, 'SIGN UP', () => Navigator.of(context).pushNamed('/customer_register')),
-                OutlineBtn('FORGOT PASSWORD?', () => Navigator.of(context).pushNamed('/forget_password'))
+                RoundBtn(context, 'SIGN UP', (context) => Navigator.of(context).pushNamed('/customer_register')),
+                OutlineBtn(context, 'FORGOT PASSWORD?', (context) => Navigator.of(context).pushNamed('/forget_password'))
               ],
             ),
           ),

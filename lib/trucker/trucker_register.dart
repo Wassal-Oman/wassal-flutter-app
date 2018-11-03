@@ -57,7 +57,7 @@ class _TruckerRegisterState extends State<TruckerRegister> {
     super.dispose();
   }
 
-  void signUp() {
+  void signUp(BuildContext context) {
 
      // get all input
     this.name = nameController.text.trim();
@@ -99,6 +99,8 @@ class _TruckerRegisterState extends State<TruckerRegister> {
             print(err);
             showToastMessage('Cannot register user!');
           });
+        } else {
+          showToastMessage('Cannot register user');
         }
       }).catchError((AuthException e) {
         print(e.message);
@@ -108,12 +110,20 @@ class _TruckerRegisterState extends State<TruckerRegister> {
       print('Passwords do not match!');
       showToastMessage('Passwords do not match!');
     }
-
   }
 
   // handle creating user in Firebase Authentication System
   Future<FirebaseUser> signingUp() async {
-    return await auth.createUserWithEmailAndPassword(email: this.email, password: this.password);
+
+    FirebaseUser firebaseUser;
+
+    try {
+      firebaseUser = await auth.createUserWithEmailAndPassword(email: this.email, password: this.password);
+    } catch (error) {
+      print(error);
+    }
+
+    return firebaseUser;
   }
 
   Future<void> addUserToDatabase(String id, String email, String name, String phone) async {
@@ -155,9 +165,9 @@ class _TruckerRegisterState extends State<TruckerRegister> {
     );
   }
 
-  void checkValidation() {
+  void checkValidation(BuildContext context) {
     if (formKey.currentState.validate()) {
-      signUp();
+      signUp(context);
     }
   }
 
@@ -180,7 +190,7 @@ class _TruckerRegisterState extends State<TruckerRegister> {
               PasswordFormField('enter password', Icons.lock, TextInputType.text, passwordController),
               PasswordFormField('confirm password', Icons.lock, TextInputType.text, confirmController),
               RoundBtn(context, 'SIGN UP', checkValidation),
-              OutlineBtn('ALREADY HAVE AN ACCOUNT?', () => Navigator.of(context).pop()),
+              OutlineBtn(context, 'ALREADY HAVE AN ACCOUNT?', (context) => Navigator.of(context).pop()),
             ],
           ),
         ),

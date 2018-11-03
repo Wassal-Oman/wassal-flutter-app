@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 // wedget class
 class OutlineBorderedBtn extends StatelessWidget {
   // attributes
+  final BuildContext context;
   final String buttonText;
   final Function onClick;
 
   // constructor
-  OutlineBorderedBtn(this.buttonText, this.onClick);
+  OutlineBorderedBtn(this.context, this.buttonText, this.onClick);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +38,7 @@ class OutlineBorderedBtn extends StatelessWidget {
                   style: TextStyle(color: Color.fromARGB(255, 59, 61, 68)),
                 ),
               ),
-              onPressed: () => onClick(),
+              onPressed: () => onClick(context),
             ),
           ),
         ],

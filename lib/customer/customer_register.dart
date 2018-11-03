@@ -179,7 +179,7 @@ class _CustomerRegisterState extends State<CustomerRegister> {
               PasswordFormField('enter password', Icons.lock, TextInputType.text, passwordController),
               PasswordFormField('confirm password', Icons.lock, TextInputType.text, confirmController),
               RoundBtn(context, 'SIGN UP', checkValidation),
-              OutlineBtn('ALREADY HAVE AN ACCOUNT?', () => Navigator.of(context).pop()),
+              OutlineBtn(context, 'ALREADY HAVE AN ACCOUNT?', (context) => Navigator.of(context).pop()),
             ],
           ),
         ),

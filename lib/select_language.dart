@@ -13,8 +13,8 @@ class SelectLanguage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            OutlineBorderedBtn('English', () => Navigator.of(context).pushNamed('/login')),
-            OutlineBorderedBtn('العربية', () => Navigator.of(context).pushNamed('/login'))
+            OutlineBorderedBtn(context, 'English', (context) => Navigator.of(context).pushNamed('/login')),
+            OutlineBorderedBtn(context, 'العربية', (context) => Navigator.of(context).pushNamed('/login'))
           ],
         ),
       )
