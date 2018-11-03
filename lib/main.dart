@@ -29,7 +29,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Wassal',
-      theme: ThemeData(fontFamily: 'Raleway'),
+      theme: ThemeData(
+        fontFamily: 'Raleway',
+        primaryColor: Color.fromARGB(255, 190, 24, 34),
+        accentColor: Color.fromARGB(255, 253, 204, 103),
+        brightness: Brightness.light
+      ),
       home: new Splash(),
       routes: <String, WidgetBuilder>{
         '/select_lang': (BuildContext context) => SelectLanguage(),
