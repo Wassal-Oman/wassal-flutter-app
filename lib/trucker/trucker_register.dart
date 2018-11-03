@@ -179,7 +179,7 @@ class _TruckerRegisterState extends State<TruckerRegister> {
               InputFormField('enter email address', 'please enter email address', Icons.email, TextInputType.emailAddress, emailController),
               PasswordFormField('enter password', Icons.lock, TextInputType.text, passwordController),
               PasswordFormField('confirm password', Icons.lock, TextInputType.text, confirmController),
-              RoundBtn('SIGN UP', checkValidation),
+              RoundBtn(context, 'SIGN UP', checkValidation),
               OutlineBtn('ALREADY HAVE AN ACCOUNT?', () => Navigator.of(context).pop()),
             ],
           ),

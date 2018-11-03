@@ -91,7 +91,7 @@ class ForgetPasswordState extends State<ForgetPassword> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           InputFormField('enter email address', 'please enter enter email address', Icons.email, TextInputType.emailAddress, emailController),
-          RoundBtn('SEND', resetPassword),
+          RoundBtn(context, 'SEND', resetPassword),
         ],
       ),
     )));

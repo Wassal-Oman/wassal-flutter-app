@@ -49,29 +49,6 @@ class _CustomerOTPVerifyState extends State<CustomerOTPVerify> {
     super.dispose();
   }
 
-  void showDailog(BuildContext context, String title, String content) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        // return object of type Dialog
-        return AlertDialog(
-          title: new Text(title),
-          content: new Text(content),
-          actions: <Widget>[
-            // usually buttons at the bottom of the dialog
-            new FlatButton(
-              child: new Text("Close"),
-              onPressed: () {
-                Navigator.of(context).pop();
-                Navigator.of(context).popAndPushNamed('/customer_login');
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   Future<void> verifyPhone(String customerPhone) async {
     final PhoneCodeAutoRetrievalTimeout autoRetrievalTimeout = (String id) {
       setState(() {
@@ -105,7 +82,7 @@ class _CustomerOTPVerifyState extends State<CustomerOTPVerify> {
     );
   }
 
-  Future<void> sendVerficationCode() async{
+  Future<void> sendVerficationCode(BuildContext context) async{
     final PhoneCodeAutoRetrievalTimeout autoRetrievalTimeout = (String id) {
       setState(() {
         this.verificationId = id;
@@ -139,6 +116,29 @@ class _CustomerOTPVerifyState extends State<CustomerOTPVerify> {
     );
   }
 
+  void showDailog(BuildContext context, String title, String content) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text(title),
+          content: new Text(content),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).popAndPushNamed('/customer_login');
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -149,7 +149,7 @@ class _CustomerOTPVerifyState extends State<CustomerOTPVerify> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           InputFormField('enter verification code', 'please enter verification code', Icons.phone, TextInputType.phone, phoneController),
-          RoundBtn('VERIFY', sendVerficationCode),
+          RoundBtn(context, 'VERIFY', sendVerficationCode),
         ],
       ),
     )));

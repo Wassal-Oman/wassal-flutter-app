@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 class RoundBtn extends StatelessWidget {
 
   // properties
+  final BuildContext context;
   final String buttonText;
   final Function onClick;
 
-  RoundBtn(this.buttonText, this.onClick);
+  RoundBtn(this.context, this.buttonText, this.onClick);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class RoundBtn extends StatelessWidget {
               shape: new RoundedRectangleBorder(
                   borderRadius: new BorderRadius.circular(30.0)),
               color: Color.fromARGB(255, 190, 24, 34),
-              onPressed: () => onClick(),
+              onPressed: () => onClick(context),
               child: new Container(
                 padding: const EdgeInsets.symmetric(
                   vertical: 20.0,

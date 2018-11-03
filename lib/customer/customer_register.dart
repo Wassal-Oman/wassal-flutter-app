@@ -57,9 +57,9 @@ class _CustomerRegisterState extends State<CustomerRegister> {
     super.dispose();
   }
 
-  void signUp() {
+  void signUp(BuildContext context) {
 
-     // get all input
+    // get all input
     this.name = nameController.text.trim();
     this.email = emailController.text.trim();
     this.phone = phoneController.text.trim();
@@ -154,9 +154,9 @@ class _CustomerRegisterState extends State<CustomerRegister> {
     );
   }
 
-  void checkValidation() {
+  void checkValidation(BuildContext context) {
     if (formKey.currentState.validate()) {
-      signUp();
+      signUp(context);
     }
   }
 
@@ -178,7 +178,7 @@ class _CustomerRegisterState extends State<CustomerRegister> {
               InputFormField('enter email address', 'please enter email address', Icons.email, TextInputType.emailAddress, emailController),
               PasswordFormField('enter password', Icons.lock, TextInputType.text, passwordController),
               PasswordFormField('confirm password', Icons.lock, TextInputType.text, confirmController),
-              RoundBtn('SIGN UP', checkValidation),
+              RoundBtn(context, 'SIGN UP', checkValidation),
               OutlineBtn('ALREADY HAVE AN ACCOUNT?', () => Navigator.of(context).pop()),
             ],
           ),

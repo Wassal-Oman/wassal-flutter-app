@@ -148,7 +148,7 @@ class _TruckerOTPVerifyState extends State<TruckerOTPVerify> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           InputFormField('enter verification code', 'please enter verification code', Icons.phone, TextInputType.phone, phoneController),
-          RoundBtn('VERIFY', sendVerficationCode),
+          RoundBtn(context, 'VERIFY', sendVerficationCode),
         ],
       ),
     )));

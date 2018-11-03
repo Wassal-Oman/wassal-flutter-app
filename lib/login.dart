@@ -25,8 +25,8 @@ class Login extends StatelessWidget {
               alignment: Alignment.center,
               child: Image.asset('assets/images/logo.png', scale: 3.0,),
             ),
-            RoundBtn('CUSTOMER', () => Navigator.of(context).pushNamed('/customer_login')),
-            RoundBtn('TRUCK DRIVER', () => Navigator.of(context).pushNamed('/trucker_login'))
+            RoundBtn(context, 'CUSTOMER', (context) => Navigator.of(context).pushNamed('/customer_login')),
+            RoundBtn(context, 'TRUCK DRIVER', (context) => Navigator.of(context).pushNamed('/trucker_login'))
           ],
         ),
       )

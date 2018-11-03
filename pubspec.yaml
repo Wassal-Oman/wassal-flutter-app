@@ -14,7 +14,6 @@ environment:
 
 dependencies:
   fluttertoast:
-  firebase_storage:
   cloud_firestore:
   firebase_messaging:
   firebase_auth:
@@ -28,8 +27,15 @@ dependencies:
   cupertino_icons: ^0.1.2
 
 dev_dependencies:
+  flutter_launcher_icons:
   flutter_test:
     sdk: flutter
+
+# App Icon Generator
+flutter_icons:
+  android: true 
+  ios: true
+  image_path: "assets/images/logo.png"
 
 
 # For information on the generic Dart part of this file, see the
