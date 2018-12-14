@@ -14,9 +14,8 @@ environment:
 
 dependencies:
   fluttertoast:
-  cloud_firestore:
   firebase_messaging:
-  firebase_auth:
+  http:
   flutter:
     sdk: flutter
   flutter_localizations:

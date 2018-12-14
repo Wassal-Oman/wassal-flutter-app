@@ -1,12 +1,10 @@
 // import needed libraries
-import 'dart:async';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 // import other dart files
-import './customer_otp_verify.dart';
+// import './customer_otp_verify.dart';
 import '../widgets/input_form_field.dart';
 import '../widgets/password_form_field.dart';
 import '../widgets/round_button.dart';
@@ -35,14 +33,8 @@ class _CustomerRegisterState extends State<CustomerRegister> {
   // form key
   final formKey = GlobalKey<FormState>();
 
-  // firebase
-  FirebaseAuth auth;
-  Firestore database;
-
   @override
   void initState() {
-    auth = FirebaseAuth.instance;
-    database = Firestore.instance;
     super.initState();
   }
 
@@ -70,59 +62,12 @@ class _CustomerRegisterState extends State<CustomerRegister> {
     if (password == confirmPassword) {
 
       // sign up user
-      signingUp().then((FirebaseUser user) {
 
-        if(user != null) {
-
-          // send a comfirmation email
-          user.sendEmailVerification().then((val) {
-            print('verifivation email has been sent');
-            showToastMessage('verifivation email has been sent');
-          }).catchError((AuthException e) {
-            print(e.message);
-            showToastMessage('Cannot send verification mail!');
-          });
-
-          // add user to database
-          addUserToDatabase(user.uid, user.email, this.name, this.phone).then((val) {
-
-            // first sign user out
-            auth.signOut();
-
-            // go to phone verification page
-            Navigator.of(context).pop();
-            Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-              return CustomerOTPVerify(phone: '+968' + this.phone);
-            }));
-
-          }).catchError((err) {
-            print(err);
-            showToastMessage('Cannot register user');
-          });
-        }
-      }).catchError((AuthException e) {
-        print(e.message);
-        showToastMessage('Sign Up Error');
-      });
     } else {
       print('Passwords do not match!');
       showToastMessage('Passwords do not match!');
     }
 
-  }
-
-  // handle creating user in Firebase Authentication System
-  Future<FirebaseUser> signingUp() async {
-    return await auth.createUserWithEmailAndPassword(email: this.email, password: this.password);
-  }
-
-  Future<void> addUserToDatabase(String id, String email, String name, String phone) async {
-    return await database.collection('customers').document(id).setData({
-      'customer_id': id,
-      'customer_email': email,
-      'customer_name': name,
-      'customer_phone': '+968' + phone
-    });
   }
 
   void showDailog(BuildContext context, String title, String content) {

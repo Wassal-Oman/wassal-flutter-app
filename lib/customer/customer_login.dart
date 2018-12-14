@@ -1,8 +1,6 @@
 // import needed libraries
-import 'dart:async';
+// import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 // import other dart files
@@ -30,14 +28,8 @@ class _CustomerLoginState extends State<CustomerLogin> {
   // form key
   final formKey = GlobalKey<FormState>();
 
-  // firebase
-  FirebaseAuth auth;
-  Firestore database;
-
   @override
   void initState() {
-    auth = FirebaseAuth.instance;
-    database = Firestore.instance;
     super.initState();
   }
 
@@ -54,44 +46,9 @@ class _CustomerLoginState extends State<CustomerLogin> {
 
     // get all input
     this.email = emailController.text.trim();
-    this.password = passwordController.text;
+    this.password = passwordController.text.trim();
 
-    // make siging in
-    signingIn(this.email, this.password).then((FirebaseUser user) {
-      if(user != null) {
-        // check for user id within database
-        getUserId(user.uid).then((DocumentSnapshot snapshot) {
-          if(snapshot.data != null) {
-            Navigator.of(context).pushReplacementNamed('/customer_home');
-          } else {
-            showToastMessage('user does not exist!');
-          }
-        }).catchError((err) {
-          print(err);
-        });
-      } else {
-        showToastMessage('wrong email or password!');
-      }
-    }).catchError((AuthException e) {
-      print(e.message);
-    });
-  }
-
-  Future<FirebaseUser> signingIn(String e, String p) async {
-
-    FirebaseUser firebaseUser;
-
-    try {
-      firebaseUser = await auth.signInWithEmailAndPassword(email: e, password: p);
-    } catch(error) {
-      print(error);
-    }
-
-    return firebaseUser;
-  }
-
-  Future<DocumentSnapshot> getUserId(String id) async {
-    return await database.collection('customers').document(id).get();
+    
   }
 
   void showToastMessage(String message) {

@@ -1,8 +1,6 @@
 // import needed libraries
-import 'dart:async';
+// import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 // class widget
 class TruckerHome extends StatefulWidget {
@@ -16,42 +14,12 @@ class _TruckerHome extends State<TruckerHome> {
   String name = 'User Name';
   String email = 'User Email';
 
-  // firebase
-  FirebaseAuth auth;
-  FirebaseUser user;
-  Firestore database;
-
   @override
   void initState() {
 
-    auth = FirebaseAuth.instance;
-    database = Firestore.instance;
-
     // get current user
-    getLoggedUser().then((FirebaseUser firebaseUser) {
-      if(firebaseUser != null) {
-        user = firebaseUser;
-
-        // get user details
-        getUserDetails(user.uid).then((DocumentSnapshot snapshot) {
-          name = snapshot.data['trucker_name'];
-          email = snapshot.data['trucker_email'];
-        }).catchError((error) {
-          print(error);
-        });
-      }
-    }).catchError((AuthException e) {
-      print(e.message);
-    });
+   
     super.initState();
-  }
-
-  Future<FirebaseUser> getLoggedUser() async {
-    return await auth.currentUser();
-  }
-
-  Future<DocumentSnapshot> getUserDetails(String id) async {
-    return await database.collection('truckers').document(id).get();
   }
 
   @override

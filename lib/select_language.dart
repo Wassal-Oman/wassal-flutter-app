@@ -1,10 +1,23 @@
 // import needed libraries
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 // import other dart files
 import './widgets/outline_bordered_button.dart';
 
-class SelectLanguage extends StatelessWidget {
+class SelectLanguage extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => SelectLanguageState();
+}
+
+class SelectLanguageState extends State<SelectLanguage> {
+
+  void showToastMessage(String message) {
+    Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_LONG,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +27,7 @@ class SelectLanguage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             OutlineBorderedBtn(context, 'English', (context) => Navigator.of(context).pushNamed('/login')),
-            OutlineBorderedBtn(context, 'العربية', (context) => Navigator.of(context).pushNamed('/login'))
+            OutlineBorderedBtn(context, 'العربية', () => showToastMessage('سيتم اضافة اللغة العربية قريبا'))
           ],
         ),
       )

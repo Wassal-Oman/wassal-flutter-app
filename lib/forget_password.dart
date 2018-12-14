@@ -1,6 +1,5 @@
 // import needed libraries
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 // import other dart files
 import './widgets/input_form_field.dart';
@@ -21,12 +20,8 @@ class ForgetPasswordState extends State<ForgetPassword> {
    // form key
   final formKey = GlobalKey<FormState>();
 
-  // firebase
-  FirebaseAuth auth;
-
   @override
   void initState() {
-    auth = FirebaseAuth.instance;
     super.initState();
   }
 
@@ -37,11 +32,7 @@ class ForgetPasswordState extends State<ForgetPassword> {
     this.email = emailController.text.trim();
 
     if(this.email.isNotEmpty) {
-      sendResetEmail(this.email).then((val) {
-        showDailog(context, 'Sent', 'Password Reset Email has been sent!');
-      }).catchError((AuthException e) {
-        print(e.message);
-      });
+    
     } else {
       print('Email field is empty!');
     }
@@ -52,10 +43,6 @@ class ForgetPasswordState extends State<ForgetPassword> {
     // clean up the controller when the Widget is disposed
     emailController.dispose();
     super.dispose();
-  }
-
-  Future<void> sendResetEmail(String userEmail) async {
-    return await auth.sendPasswordResetEmail(email: userEmail);
   }
 
   void showDailog(BuildContext context, String title, String content) {
