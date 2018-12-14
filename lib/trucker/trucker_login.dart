@@ -18,11 +18,11 @@ class TruckerLogin extends StatefulWidget {
 class _TruckerLoginState extends State<TruckerLogin> {
 
   // local variables
-  String email;
+  String phone;
   String password;
 
   // text form controllers
-  final emailController = TextEditingController();
+  final phoneController = TextEditingController();
   final passwordController = TextEditingController();
 
   // form key
@@ -36,7 +36,7 @@ class _TruckerLoginState extends State<TruckerLogin> {
   @override
   void dispose() {
     // clean up the controller when the Widget is disposed
-    emailController.dispose();
+    phoneController.dispose();
     passwordController.dispose();
     super.dispose();
   }
@@ -45,7 +45,7 @@ class _TruckerLoginState extends State<TruckerLogin> {
   void signIn(BuildContext context) {
 
     // get all input
-    this.email = emailController.text.trim();
+    this.phone = phoneController.text.trim();
     this.password = passwordController.text.trim();
   }
 
@@ -72,7 +72,7 @@ class _TruckerLoginState extends State<TruckerLogin> {
             child: Column(
               children: <Widget>[
                 Image.asset('assets/images/logo.png', scale: 3.0),
-                InputFormField('enter email address', 'please enter a valid email',Icons.email, TextInputType.emailAddress, emailController),
+                InputFormField('enter phone number', 'please enter phone number', Icons.phone, TextInputType.phone, phoneController),
                 PasswordFormField('enter password', Icons.lock, TextInputType.text, passwordController),
                 RoundBtn(context, 'SIGN IN', checkValidation),
                 RoundBtn(context, 'SIGN UP', (context) => Navigator.of(context).pushNamed('/trucker_register')),

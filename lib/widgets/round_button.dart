@@ -20,7 +20,8 @@ class RoundBtn extends StatelessWidget {
           new Expanded(
             child: new FlatButton(
               shape: new RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(30.0)),
+                  borderRadius: new BorderRadius.circular(30.0)
+              ),
               color: Color.fromARGB(255, 190, 24, 34),
               onPressed: () => onClick(context),
               child: new Container(

@@ -7,10 +7,10 @@ import './widgets/outline_bordered_button.dart';
 
 class SelectLanguage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => SelectLanguageState();
+  State<StatefulWidget> createState() => _SelectLanguageState();
 }
 
-class SelectLanguageState extends State<SelectLanguage> {
+class _SelectLanguageState extends State<SelectLanguage> {
 
   void showToastMessage(String message) {
     Fluttertoast.showToast(
@@ -27,7 +27,7 @@ class SelectLanguageState extends State<SelectLanguage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             OutlineBorderedBtn(context, 'English', (context) => Navigator.of(context).pushNamed('/login')),
-            OutlineBorderedBtn(context, 'العربية', () => showToastMessage('سيتم اضافة اللغة العربية قريبا'))
+            OutlineBorderedBtn(context, 'العربية', (context) => showToastMessage('سيتم اضافة اللغة العربية قريبا'))
           ],
         ),
       )

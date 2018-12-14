@@ -16,6 +16,9 @@ dependencies:
   fluttertoast:
   firebase_messaging:
   http:
+  shared_preferences:
+  google_maps_flutter: ^0.0.3+3
+  geolocator:
   flutter:
     sdk: flutter
   flutter_localizations:

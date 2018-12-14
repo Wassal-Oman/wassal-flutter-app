@@ -1,7 +1,9 @@
 // import needed libraries
-// import 'dart:async';
+import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart' as http;
 
 // import other dart files
 // import './customer_otp_verify.dart';
@@ -9,6 +11,9 @@ import '../widgets/input_form_field.dart';
 import '../widgets/password_form_field.dart';
 import '../widgets/round_button.dart';
 import '../widgets/outline_button.dart';
+
+// import settings file
+import '../settings.dart' as settings;
 
 class CustomerRegister extends StatefulWidget {
   @override
@@ -49,25 +54,46 @@ class _CustomerRegisterState extends State<CustomerRegister> {
     super.dispose();
   }
 
+  // method to make http request
+  Future<http.Response> registerRequest(String name, String email, String phone, String password, String confirmPassword) async {
+    return await http.post(settings.Routes.CUSTOMER_REGISTER, body: {
+      'name': name,
+      'email': email,
+      'phone': phone,
+      'password': password,
+      'confirmPassword': confirmPassword
+    });
+  } 
+
   void signUp(BuildContext context) {
 
     // get all input
     this.name = nameController.text.trim();
     this.email = emailController.text.trim();
     this.phone = phoneController.text.trim();
-    this.password = passwordController.text;
-    this.confirmPassword = confirmController.text;
+    this.password = passwordController.text.trim();
+    this.confirmPassword = confirmController.text.trim();
 
     // check if passwords match
     if (password == confirmPassword) {
 
       // sign up user
+      registerRequest(this.name, this.email, this.phone, this.password, this.confirmPassword).then((response) {
+        if(response.statusCode != 201) {
+          var json = jsonDecode(response.body);
+          showToastMessage(json['message']);
+        } else {
+          var json = jsonDecode(response.body);
+          showDailog(context, json['status'], json['message']);
+        }
+      }).catchError((err) {
+        showToastMessage('Cannot connect to server!');
+      });
 
     } else {
       print('Passwords do not match!');
       showToastMessage('Passwords do not match!');
     }
-
   }
 
   void showDailog(BuildContext context, String title, String content) {
