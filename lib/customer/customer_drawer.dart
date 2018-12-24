@@ -36,14 +36,17 @@ class CustomerDrawer extends StatelessWidget {
           ),
           ListTile(
             title: Text('Profile'),
+            leading: Icon(Icons.account_box),
             onTap: () => viewProfile(),
           ),
           ListTile(
             title: Text('Orders'),
+            leading: Icon(Icons.border_color),
             onTap: () => viewOrders(),
           ),
           ListTile(
             title: Text('Logout'),
+            leading: Icon(Icons.exit_to_app),
             onTap: () => logout(context),
           ),
         ],

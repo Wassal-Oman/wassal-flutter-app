@@ -19,6 +19,8 @@ dependencies:
   shared_preferences:
   google_maps_flutter: ^0.0.3+3
   geolocator:
+  google_maps_webservice: ^0.0.10
+  flutter_google_places: ^0.1.4+1
   flutter:
     sdk: flutter
   flutter_localizations:
