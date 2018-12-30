@@ -5,14 +5,12 @@ import 'package:flutter/material.dart';
 class SelectNavigation extends StatefulWidget {
 
   // attributes
-  final String title;
   final List<String> values;
   final bool disabled;
   final ValueChanged<int> onChange;
 
   // constructor
   SelectNavigation({
-    this.title,
     this.values,
     this.disabled = false,
     this.onChange,
@@ -49,16 +47,18 @@ class SelectNavigationState extends State<SelectNavigation> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Color.fromARGB(255, 190, 24, 34),
       child: Column(
         children: <Widget>[
           Divider(color: Colors.black54),
-          Text(widget.title),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               IconButton(
                 padding: EdgeInsets.all(4.0),
-                icon: Icon(Icons.arrow_back),
+                icon: Icon(Icons.keyboard_arrow_left),
+                color: Colors.white,
+                iconSize: 40.0,
                 onPressed: widget.disabled ? null : previous,
               ),
               Text(
@@ -67,12 +67,14 @@ class SelectNavigationState extends State<SelectNavigation> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
-                  color: widget.disabled ? Colors.black26 : Colors.black87,
+                  color: Colors.white,
                 ),
               ),
               IconButton(
                 padding: EdgeInsets.all(4.0),
-                icon: Icon(Icons.arrow_forward),
+                icon: Icon(Icons.keyboard_arrow_right),
+                color: Colors.white,
+                iconSize: 40.0,
                 onPressed: widget.disabled ? null : next,
               ),
             ],
