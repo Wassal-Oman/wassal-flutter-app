@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:connectivity/connectivity.dart';
 
 // import other dart files
 import '../widgets/input_form_field.dart';
@@ -42,6 +43,12 @@ class _CustomerLoginState extends State<CustomerLogin> {
     super.dispose();
   }
 
+  // method to check internet connectivity
+  Future<bool> isOnline() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    return (connectivityResult == ConnectivityResult.mobile) || (connectivityResult == ConnectivityResult.wifi);
+  }
+
   // method to make http request
   Future<http.Response> loginRequest(String phone, String password) async {
     return await http.post(settings.Routes.CUSTOMER_LOGIN, body: {
@@ -63,26 +70,36 @@ class _CustomerLoginState extends State<CustomerLogin> {
     this.phone = phoneController.text.trim();
     this.password = passwordController.text.trim();
 
-    // send login request
-    loginRequest(this.phone, this.password).then((response) {
-      // check for reponse code
-      if(response.statusCode != 200) {
-        var json = jsonDecode(response.body);
-        showToastMessage(json['message']);
-      } else {
-        // convert response string into json
-        var json = jsonDecode(response.body);
-        storeLoginData(response.body).then((val) {
-          print('User data has been stored into local storage');
-          // go to home page
-          Navigator.of(context).pushReplacementNamed('/customer_home');
+    // check internet connectivity
+    isOnline().then((val) {
+      if(val) {
+        // send login request
+        loginRequest(this.phone, this.password).then((response) {
+          // check for reponse code
+          if(response.statusCode != 200) {
+            var json = jsonDecode(response.body);
+            showToastMessage(json['message']);
+          } else {
+            // convert response string into json
+            var json = jsonDecode(response.body);
+            storeLoginData(response.body).then((val) {
+              print('User data has been stored into local storage');
+              // go to home page
+              Navigator.of(context).pushReplacementNamed('/customer_home');
+            }).catchError((err) {
+              print('User data cannot be stored due to ${err.toString()}');
+            });
+            showToastMessage(json['message']);
+          }
         }).catchError((err) {
-          print('User data cannot be stored due to ${err.toString()}');
+          showToastMessage('Cannot connect to server!');
         });
-        showToastMessage(json['message']);
+      } else {
+        showToastMessage('No Internet Connectivity');
       }
     }).catchError((err) {
-      showToastMessage('Cannot connect to server!');
+      // error in connectivity plugin
+      print(err);
     });
   }
 

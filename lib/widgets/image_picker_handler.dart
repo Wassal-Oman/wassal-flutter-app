@@ -53,5 +53,5 @@ class ImagePickerHandler {
 }
 
 abstract class ImagePickerListener {
-  userImage(File _image);
+  userImage(File image);
 }

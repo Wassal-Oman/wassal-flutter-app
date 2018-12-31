@@ -39,14 +39,15 @@ class InputField extends StatelessWidget {
             margin: const EdgeInsets.only(left: 00.0, right: 10.0),
           ),
           Expanded(
-              child: TextField(
-            keyboardType: inputType,
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              hintText: text,
-              hintStyle: TextStyle(color: Colors.grey),
-            ),
-          ))
+            child: TextField(
+              keyboardType: inputType,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: text,
+                hintStyle: TextStyle(color: Colors.grey),
+              ),
+            )
+          )
         ],
       ),
     );

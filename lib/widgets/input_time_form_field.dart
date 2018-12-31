@@ -1,17 +1,20 @@
 // import needed libraries
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:datetime_picker_formfield/time_picker_formfield.dart';
 
 // wedget class
-class InputFormField extends StatelessWidget {
+class InputTimeFormField extends StatelessWidget {
   // attributes
   final String text;
   final String validationText;
   final IconData icon;
   final TextInputType inputType;
   final TextEditingController textController;
+  final timeFormat = DateFormat("h:mm a");
 
   // contsructor
-  InputFormField(this.text, this.validationText, this.icon, this.inputType, this.textController);
+  InputTimeFormField(this.text, this.validationText, this.icon, this.inputType, this.textController);
 
   @override
   Widget build(BuildContext context) {
@@ -40,20 +43,22 @@ class InputFormField extends StatelessWidget {
             margin: const EdgeInsets.only(left: 00.0, right: 10.0),
           ),
           Expanded(
-              child: TextFormField(
-            keyboardType: inputType,
-            controller: textController,
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              hintText: text,
-              hintStyle: TextStyle(color: Colors.grey),
-            ),
-            validator: (value) {
-              if (value.trim().isEmpty) {
-                return validationText;
-              }
-            },
-          ))
+            child: TimePickerFormField(
+              format: timeFormat,
+              keyboardType: inputType,
+              controller: textController,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: text,
+                hintStyle: TextStyle(color: Colors.grey),
+              ),
+              validator: (value) {
+                if (value == null) {
+                  return validationText;
+                }
+              },
+            )
+          )
         ],
       ),
     );

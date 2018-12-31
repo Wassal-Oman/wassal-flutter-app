@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 // wedget class
-class InputFormField extends StatelessWidget {
+class InputMultipleFormField extends StatelessWidget {
   // attributes
   final String text;
   final String validationText;
@@ -11,7 +11,7 @@ class InputFormField extends StatelessWidget {
   final TextEditingController textController;
 
   // contsructor
-  InputFormField(this.text, this.validationText, this.icon, this.inputType, this.textController);
+  InputMultipleFormField(this.text, this.validationText, this.icon, this.inputType, this.textController);
 
   @override
   Widget build(BuildContext context) {
@@ -34,26 +34,28 @@ class InputFormField extends StatelessWidget {
             ),
           ),
           Container(
-            height: 30.0,
+            height: 75.0,
             width: 1.0,
             color: Colors.grey.withOpacity(0.5),
             margin: const EdgeInsets.only(left: 00.0, right: 10.0),
           ),
           Expanded(
-              child: TextFormField(
-            keyboardType: inputType,
-            controller: textController,
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              hintText: text,
-              hintStyle: TextStyle(color: Colors.grey),
-            ),
-            validator: (value) {
-              if (value.trim().isEmpty) {
-                return validationText;
-              }
-            },
-          ))
+            child: TextFormField(
+              keyboardType: inputType,
+              controller: textController,
+              maxLines: 3,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: text,
+                hintStyle: TextStyle(color: Colors.grey),
+              ),
+              validator: (value) {
+                if (value.trim().isEmpty) {
+                  return validationText;
+                }
+              },
+            )
+          )
         ],
       ),
     );
