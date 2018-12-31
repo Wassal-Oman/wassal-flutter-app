@@ -13,10 +13,10 @@ class CustomerOTPVerify extends StatefulWidget {
   CustomerOTPVerify({this.phone});
 
   @override
-  State<StatefulWidget> createState() => _CustomerOTPVerifyState();
+  State<StatefulWidget> createState() => CustomerOTPVerifyState();
 }
 
-class _CustomerOTPVerifyState extends State<CustomerOTPVerify> {
+class CustomerOTPVerifyState extends State<CustomerOTPVerify> {
   // attributes
   String phone;
   String smsCode;

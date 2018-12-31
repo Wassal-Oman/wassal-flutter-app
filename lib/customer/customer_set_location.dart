@@ -6,10 +6,10 @@ import 'package:geolocator/geolocator.dart';
 // class widget
 class CustomerSetLocation extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _CustomerSetLocationState();
+  State<StatefulWidget> createState() => CustomerSetLocationState();
 }
 
-class _CustomerSetLocationState extends State<CustomerSetLocation> {
+class CustomerSetLocationState extends State<CustomerSetLocation> {
 
   // attributes
   bool mapLoaded = false;

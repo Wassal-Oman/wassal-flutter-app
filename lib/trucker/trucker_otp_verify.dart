@@ -13,10 +13,10 @@ class TruckerOTPVerify extends StatefulWidget {
   TruckerOTPVerify({this.phone});
 
   @override
-  State<StatefulWidget> createState() => _TruckerOTPVerifyState();
+  State<StatefulWidget> createState() => TruckerOTPVerifyState();
 }
 
-class _TruckerOTPVerifyState extends State<TruckerOTPVerify> {
+class TruckerOTPVerifyState extends State<TruckerOTPVerify> {
   // attributes
   String phone;
   String smsCode;
@@ -71,16 +71,18 @@ class _TruckerOTPVerifyState extends State<TruckerOTPVerify> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(
-            child: Form(
-      key: this.formKey,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          InputFormField('enter verification code', 'please enter verification code', Icons.phone, TextInputType.phone, phoneController),
-          RoundBtn(context, 'VERIFY', sendVerficationCode),
-        ],
-      ),
-    )));
+      body: Center(
+        child: Form(
+          key: this.formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              InputFormField('enter verification code', 'please enter verification code', Icons.phone, TextInputType.phone, phoneController),
+              RoundBtn(context, 'VERIFY', sendVerficationCode),
+            ],
+          ),
+        )
+      )
+    );
   }
 }

@@ -19,10 +19,10 @@ import '../settings.dart' as settings;
 // wedget class
 class CustomerLogin extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _CustomerLoginState();
+  State<StatefulWidget> createState() => CustomerLoginState();
 }
 
-class _CustomerLoginState extends State<CustomerLogin> {
+class CustomerLoginState extends State<CustomerLogin> {
 
   // local variables
   String phone;
@@ -126,7 +126,7 @@ class _CustomerLoginState extends State<CustomerLogin> {
             child: Column(
               children: <Widget>[
                 Image.asset('assets/images/logo.png', scale: 3.0),
-                InputFormField('enter phone number', 'please enter phone number',Icons.phone, TextInputType.phone, phoneController),
+                InputFormField('enter phone number', 'please enter phone number', Icons.phone, TextInputType.phone, phoneController),
                 PasswordFormField('enter password', Icons.lock, TextInputType.text, passwordController),
                 RoundBtn(context, 'SIGN IN', checkValidation),
                 RoundBtn(context, 'SIGN UP', (context) => Navigator.of(context).pushNamed('/customer_register')),

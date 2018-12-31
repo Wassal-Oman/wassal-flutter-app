@@ -17,10 +17,10 @@ import '../settings.dart' as settings;
 
 class CustomerRegister extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _CustomerRegisterState();
+  State<StatefulWidget> createState() => CustomerRegisterState();
 }
 
-class _CustomerRegisterState extends State<CustomerRegister> {
+class CustomerRegisterState extends State<CustomerRegister> {
   // define attributes
   String name;
   String phone;

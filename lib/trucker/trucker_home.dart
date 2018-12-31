@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 // class widget
 class TruckerHome extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _TruckerHome();
+  State<StatefulWidget> createState() => TruckerHomeState();
 }
 
-class _TruckerHome extends State<TruckerHome> {
+class TruckerHomeState extends State<TruckerHome> {
 
     // attributes
   String name = 'User Name';

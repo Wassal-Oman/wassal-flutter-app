@@ -12,6 +12,10 @@ import './customer/customer_login.dart';
 import './customer/customer_register.dart';
 import './customer/customer_otp_verify.dart';
 import './customer/customer_home.dart';
+import './customer/customer_profile.dart';
+import './customer/customer_change_password.dart';
+import './customer/customer_view_order.dart';
+import './customer/customer_settings.dart';
 import './customer/customer_set_location.dart';
 
 // truck driver dart files (routes)
@@ -43,6 +47,10 @@ class MyApp extends StatelessWidget {
         '/customer_register': (BuildContext context) => CustomerRegister(),
         '/customer_otp_verify': (BuildContext context) => CustomerOTPVerify(),
         '/customer_home': (BuildContext context) => CustomerHome(),
+        '/customer_profile': (BuildContext context) => CustomerProfile(),
+        '/customer_change_password': (BuildContext context) => CustomerChangePassword(),
+        '/customer_view_orders': (BuildContext context) => CustomerViewOrders(),
+        '/customer_settings': (BuildContext context) => CustomerSettings(),
         '/customer_set_location': (BuildContext context) => CustomerSetLocation(),
         '/trucker_login': (BuildContext context) => TruckerLogin(),
         '/trucker_register': (BuildContext context) => TruckerRegister(),

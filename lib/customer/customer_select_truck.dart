@@ -17,10 +17,10 @@ class CustomerSelectTruck extends StatefulWidget {
   CustomerSelectTruck({@required this.pickLocation, @required this.dropLocation});
 
   @override
-  State<StatefulWidget> createState() => _CustomerSelectTruckState();
+  State<StatefulWidget> createState() => CustomerSelectTruckState();
 }
 
-class _CustomerSelectTruckState extends State<CustomerSelectTruck> {
+class CustomerSelectTruckState extends State<CustomerSelectTruck> {
 
   // attributes
   int index = 0;

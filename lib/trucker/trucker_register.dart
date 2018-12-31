@@ -12,10 +12,10 @@ import '../widgets/outline_button.dart';
 
 class TruckerRegister extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _TruckerRegisterState();
+  State<StatefulWidget> createState() => TruckerRegisterState();
 }
 
-class _TruckerRegisterState extends State<TruckerRegister> {
+class TruckerRegisterState extends State<TruckerRegister> {
   // define attributes
   String name;
   String phone;

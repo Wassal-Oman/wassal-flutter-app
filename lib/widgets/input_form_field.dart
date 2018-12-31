@@ -40,20 +40,21 @@ class InputFormField extends StatelessWidget {
             margin: const EdgeInsets.only(left: 00.0, right: 10.0),
           ),
           Expanded(
-              child: TextFormField(
-            keyboardType: inputType,
-            controller: textController,
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              hintText: text,
-              hintStyle: TextStyle(color: Colors.grey),
-            ),
-            validator: (value) {
-              if (value.trim().isEmpty) {
-                return validationText;
+            child: TextFormField(
+              keyboardType: inputType,
+              controller: textController,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: text,
+                hintStyle: TextStyle(color: Colors.grey),
+              ),
+              validator: (value) {
+                if (value.trim().isEmpty) {
+                  return validationText;
+                }
               }
-            },
-          ))
+            )
+          )
         ],
       ),
     );

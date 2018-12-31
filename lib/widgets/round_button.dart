@@ -36,8 +36,7 @@ class RoundBtn extends StatelessWidget {
                       child: Text(
                         buttonText,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
+                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],

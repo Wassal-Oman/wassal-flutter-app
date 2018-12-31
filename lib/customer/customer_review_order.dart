@@ -67,7 +67,7 @@ class CustomerReviewOrderState extends State<CustomerReviewOrder> {
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: ExactAssetImage(widget.image.path),
-                      fit: BoxFit.contain
+                      fit: BoxFit.cover
                     )
                   )
                 )
@@ -76,14 +76,17 @@ class CustomerReviewOrderState extends State<CustomerReviewOrder> {
             Card(
               elevation: 2.0,
               margin: EdgeInsets.all(10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Text('From: ${widget.pickupLocation}', style: TextStyle(fontSize: 16.0)),
-                  Text(' - ', style: TextStyle(fontSize: 16.0)),
-                  Text('To: ${widget.dropLocation}', style: TextStyle(fontSize: 16.0))
-                ],
-              ),
+              child: Container(
+                height: 50.0,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    Text('From: ${widget.pickupLocation}', style: TextStyle(fontSize: 16.0)),
+                    Text(' - ', style: TextStyle(fontSize: 16.0)),
+                    Text('To: ${widget.dropLocation}', style: TextStyle(fontSize: 16.0))
+                  ],
+                ),
+              )
             ),
             Card(
               elevation: 2.0,

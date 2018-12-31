@@ -93,13 +93,23 @@ class _CustomerHomeState extends State<CustomerHome> {
   }
 
   // method to view profile
-  void viewProfile() {
-    showToastMessage('User Profile');
+  void viewProfile(BuildContext context) {
+    Navigator.of(context).pushNamed('/customer_profile');
+  }
+
+  // method to change password
+  void changePassword(BuildContext context) {
+    Navigator.of(context).pushNamed('/customer_change_password');
   }
 
   // method to view orders
-  void viewOrders() {
-    showToastMessage('User Orders');
+  void viewOrders(BuildContext context) {
+    Navigator.of(context).pushNamed('/customer_view_orders');
+  }
+
+  // method to view settings
+  void viewSettings(BuildContext context) {
+    Navigator.of(context).pushNamed('/customer_settings');
   }
 
   // method to show a toast
@@ -131,7 +141,7 @@ class _CustomerHomeState extends State<CustomerHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Specify Location')),
-      drawer: CustomerDrawer(name, email, viewProfile, viewOrders, logout, context),
+      drawer: CustomerDrawer(name, email, viewProfile, changePassword, viewOrders, viewSettings, logout, context),
       body: Form(
         key: formKey,
         child: SingleChildScrollView(
@@ -143,8 +153,8 @@ class _CustomerHomeState extends State<CustomerHome> {
                 color: Color.fromARGB(255, 190, 24, 34),
                 child: Text('Select Your Location', style: TextStyle(color: Colors.white)),
               ),
-              InputFormField('From / Pick Location', 'please enter pickup location',Icons.pin_drop, TextInputType.text, pickLocationController),
-              InputFormField('To / Drop Location', 'please enter destination',Icons.pin_drop, TextInputType.text, dropLocationController),
+              InputFormField('From / Pick Location', 'please enter pickup location', Icons.pin_drop, TextInputType.text, pickLocationController),
+              InputFormField('To / Drop Location', 'please enter destination', Icons.pin_drop, TextInputType.text, dropLocationController),
               RoundBtn(context, 'NEXT', checkValidation),
             ],
           ),
