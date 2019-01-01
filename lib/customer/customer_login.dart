@@ -83,6 +83,7 @@ class CustomerLoginState extends State<CustomerLogin> {
             // convert response string into json
             var json = jsonDecode(response.body);
             storeLoginData(response.body).then((val) {
+              print(response.body);
               print('User data has been stored into local storage');
               // go to home page
               Navigator.of(context).pushReplacementNamed('/customer_home');

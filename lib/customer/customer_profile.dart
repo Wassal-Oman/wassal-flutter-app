@@ -20,9 +20,11 @@ class CustomerProfile extends StatefulWidget {
 
 class CustomerProfileState extends State<CustomerProfile> {
   // define attributes
+  static int id;
   static String name;
   static String phone;
   static String email;
+  static String token;
 
   // text form field controller
   TextEditingController nameController;
@@ -38,12 +40,15 @@ class CustomerProfileState extends State<CustomerProfile> {
     getUserData().then((data) {
       var json = jsonDecode(data);
       var userData = json['data'];
+      String tokenData = json['token'];
 
       // get user name and email
       setState(() {
+        id = userData['id'];
         name = userData['name'];
         email = userData['email'];
         phone = userData['phone'];
+        token = tokenData;
       });
 
       // show retrieved data
@@ -72,20 +77,30 @@ class CustomerProfileState extends State<CustomerProfile> {
     return prefs.getString('CUSTOMER');
   }
 
-  // method to get user data from local storage
-  Future<bool> setUserData() async{
+  // method to store user data
+  Future<void> setUserData(String data) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return await prefs.remove('CUSTOMER');
+    await prefs.setString('CUSTOMER', data);
   }
 
   // method to make http request
   Future<http.Response> updateRequest(String name, String email, String phone) async {
-    return await http.post(settings.Routes.CUSTOMER_UPDATE_PROFILE, body: {
-      'name': name,
-      'email': email,
-      'phone': phone
-    });
-  } 
+
+    // header
+    Map<String, String> header = {
+      'Authorization': 'Bearer $token'
+    };
+
+    return await http.post(settings.Routes.CUSTOMER_UPDATE_PROFILE, 
+      body: {
+        'id': id.toString(),
+        'name': name,
+        'email': email,
+        'phone': phone
+      },
+      headers: header
+    );
+  }
 
   void updateProfile(BuildContext context) {
 
@@ -104,7 +119,8 @@ class CustomerProfileState extends State<CustomerProfile> {
         showDailog(context, json['status'], json['message']);
       }
     }).catchError((err) {
-      showToastMessage('Cannot connect to server!');
+      print(err);
+      showToastMessage('Server Error');
     });
   }
 

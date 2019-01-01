@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 // import other dart files
 import '../widgets/password_form_field.dart';
@@ -19,13 +20,13 @@ class CustomerChangePassword extends StatefulWidget {
 
 class CustomerChangePasswordState extends State<CustomerChangePassword> {
   // define attributes
-  String oldPassword;
-  String newPassword;
+  String password;
   String confirmPassword;
+  String token;
+  int id;
 
   // text form field controller
-  final oldPassController = TextEditingController();
-  final newPassController = TextEditingController();
+  final passwordController = TextEditingController();
   final confirmController = TextEditingController();
 
   // form key
@@ -33,39 +34,66 @@ class CustomerChangePasswordState extends State<CustomerChangePassword> {
 
   @override
   void initState() {
+    // get user data
+    getUserData().then((data) {
+      var json = jsonDecode(data);
+      var userData = json['data'];
+      String tokenData = json['token'];
+
+      // get access token
+      setState(() {
+        id = userData['id'];
+        token = tokenData;
+      });
+
+    }).catchError((err) {
+      print('User data cannot be retrieved due to ${err.toString()}');
+    });
     super.initState();
   }
 
   @override
   void dispose() {
     // clean up the controller when the Widget is disposed
-    oldPassController.dispose();
-    newPassController.dispose();
+    passwordController.dispose();
     confirmController.dispose();
     super.dispose();
   }
 
+  // method to get user data from local storage
+  Future<String> getUserData() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('CUSTOMER');
+  }
+
   // method to make http request
-  Future<http.Response> changePasswordRequest(String oldPassword, String newPassword, String confirmPassword) async {
-    return await http.post(settings.Routes.CUSTOMER_CHANGE_PASSWORD, body: {
-      'oldPassword': oldPassword,
-      'newPassword': newPassword,
-      'confirmPassword': confirmPassword
-    });
+  Future<http.Response> changePasswordRequest(int id, String password, String confirmPassword) async {
+    // header
+    Map<String, String> header = {
+      'Authorization': 'Bearer $token'
+    };
+
+    return await http.post(settings.Routes.CUSTOMER_CHANGE_PASSWORD, 
+      body: {
+        'id': id.toString(),
+        'password': password,
+        'confirmPassword': confirmPassword
+      },
+      headers: header
+    );
   } 
 
   void changePassword(BuildContext context) {
 
     // get all input
-    this.oldPassword = oldPassController.text.trim();
-    this.newPassword = newPassController.text.trim();
+    this.password = passwordController.text.trim();
     this.confirmPassword = confirmController.text.trim();
 
     // check if passwords match
-    if (newPassword == confirmPassword) {
+    if (password == confirmPassword) {
 
       // sign up user
-      changePasswordRequest(this.oldPassword, this.newPassword, this.confirmPassword).then((response) {
+      changePasswordRequest(this.id, this.password, this.confirmPassword).then((response) {
         if(response.statusCode != 200) {
           var json = jsonDecode(response.body);
           showToastMessage(json['message']);
@@ -120,7 +148,6 @@ class CustomerChangePasswordState extends State<CustomerChangePassword> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(title: Text('Change Password')),
       body: Center(
@@ -132,8 +159,7 @@ class CustomerChangePasswordState extends State<CustomerChangePassword> {
                 Padding(
                   padding: EdgeInsets.all(10.0),
                 ),
-                PasswordFormField('enter old password', Icons.lock, TextInputType.text, oldPassController),
-                PasswordFormField('enter new password', Icons.lock, TextInputType.text, newPassController),
+                PasswordFormField('enter new password', Icons.lock, TextInputType.text, passwordController),
                 PasswordFormField('confirm new password', Icons.lock, TextInputType.text, confirmController),
                 RoundBtn(context, 'CHANGE PASSWORD', checkValidation)
               ],
